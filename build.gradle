@@ -1,0 +1,109 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext.kotlin_version = "1.3.72"
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:4.0.1"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+ext {
+    multiDex_version = "1.0.3"
+    kotlin_version = "1.3.71"
+    appcompat_version = "1.1.0"
+    constraint_version = "1.1.0"
+    material_version = "1.0.0"
+    rxjava_version = "2.2.7"
+    rxAndroid_version = '2.1.1'
+    lifecycle_version = "2.2.0"
+    ktx_version = "1.3.1"
+    coroutine_version = "1.3.4"
+    okhttp_version = "3.12.1"
+    okhttp_logging_version = "4.2.0"
+    retrofit_version = "2.6.2"
+    glide_version = "4.11.0"
+    paging_version = "1.0.0"
+    gander_version = "3.1.0"
+    dagger_version = "2.24"
+
+    multidexDependencies = [
+            multidex                  : "com.android.support:multidex:$multiDex_version"
+    ]
+
+    kotlinDependencies = [
+            kotlin                : "androidx.core:core-ktx:$ktx_version",
+            kotlinStdLib          : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
+            kotlinStdLibJre8      : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    ]
+    androidSupportDependencies = [
+            appcompat             : "androidx.appcompat:appcompat:$appcompat_version",
+            constrainlayout       : "androidx.constraintlayout:constraintlayout:$constraint_version",
+            recycleview           : "androidx.recyclerview:recyclerview:$appcompat_version",
+            archPaging            : "android.arch.paging:runtime:$paging_version",
+            supportDesign         : "com.google.android.material:material:$material_version",
+            extention             : "androidx.lifecycle:lifecycle-extensions:$lifecycle_version",
+            runtime               : "androidx.lifecycle:lifecycle-runtime:$lifecycle_version",
+            viewmodel             : "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+    ]
+    rxJavaAndroidDependencies = [
+            rxJava                : "io.reactivex.rxjava2:rxjava:$rxjava_version",
+            rxAndroid             : "io.reactivex.rxjava2:rxandroid:$rxAndroid_version"
+    ]
+    coroutineDependencies = [
+            kotlinCrtCore         : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version",
+            kotlinCrtAndroid      : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
+    ]
+    daggerDependencies = [
+            dagger                : "com.squareup.okhttp3:okhttp:$okhttp_version",
+            daggerAndroid         : "com.google.dagger:dagger-android:$dagger_version",
+            daggerAndroidSupport  : "com.google.dagger:dagger-android-support:$dagger_version"
+    ]
+    daggerKaptDependencies = [
+            daggerAndroidProcessor: "com.google.dagger:dagger-android-processor:$dagger_version",
+            daggerCompiler        : "com.google.dagger:dagger-compiler:$dagger_version"
+    ]
+    okHttpDependencies = [
+            okhttp                : "com.squareup.okhttp3:okhttp:$okhttp_version",
+            okhttp3logging        : "com.squareup.okhttp3:logging-interceptor:$okhttp_logging_version"
+    ]
+    retrofitDependencies = [
+            retrofit              : "com.squareup.retrofit2:retrofit:$retrofit_version",
+            retrofitConverterGson : "com.squareup.retrofit2:converter-gson:$retrofit_version",
+            retrofit2adapter      : "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+    ]
+    glideDependencies = [
+            glide                 : "com.github.bumptech.glide:glide:$glide_version"
+    ]
+    testDependencies = [
+            junit                 : "junit:junit:4.13"
+    ]
+    testImplementationDependencies = [
+            junit                 : "androidx.test.ext:junit:1.1.2",
+            expresso              : "androidx.test.espresso:espresso-core:3.3.0"
+    ]
+    ganderDebugDependencies = [
+            ganderDebug           : "com.ashokvarma.android:gander-imdb:$gander_version"
+    ]
+    ganderReleaseDependencies = [
+            ganderRelease         : "com.ashokvarma.android:gander-no-op:$gander_version"
+    ]
+}

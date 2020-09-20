@@ -1,0 +1,90 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId "comtest.ct.cd.achmadfuad"
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        buildConfigField "String", "SERVER_URL", '"https://api.github.com/"'
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        release {
+            storeFile rootProject.file('release.keystore')
+            keyAlias 'release.keystore'
+            keyPassword 'password123'
+            storePassword 'password123'
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            debuggable true
+            applicationIdSuffix ".debug"
+            versionNameSuffix '-dev'
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            debuggable false
+            jniDebuggable false
+            renderscriptDebuggable false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            android.applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "search-user-github-${variant.versionName}(${variant.versionCode}).apk"
+                }
+            }
+            signingConfig signingConfigs.release
+        }
+    }
+
+    bundle {
+        language { enableSplit = true }
+        density { enableSplit = true }
+        abi { enableSplit = true }
+    }
+    lintOptions {
+        abortOnError false
+        ignoreWarnings true
+        quiet true
+    }
+
+    buildFeatures {
+        dataBinding true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation multidexDependencies.values()
+
+    implementation kotlinDependencies.values()
+    implementation androidSupportDependencies.values()
+    implementation rxJavaAndroidDependencies.values()
+    implementation coroutineDependencies.values()
+    implementation daggerDependencies.values()
+    implementation okHttpDependencies.values()
+    implementation retrofitDependencies.values()
+    implementation glideDependencies.values()
+
+    debugImplementation ganderDebugDependencies.values()
+    releaseImplementation ganderReleaseDependencies.values()
+
+    testImplementation testDependencies.values()
+    androidTestImplementation testImplementationDependencies.values()
+
+    kapt daggerKaptDependencies.values()
+}
